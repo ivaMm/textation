@@ -1,8 +1,10 @@
 require "textation/version"
 
-module Textation
+#module Textation
   class Text
-    def self.analyze_file(file_name)
+    #extend Textation
+
+    def analyze_file(file_name)
       text = File.open(file_name, 'r').read
       stop_words = File.open('data/stop_words.txt', 'r').read.split(/\b/)
       useful_words = text.downcase.split(/\b/).delete_if { |word| stop_words.include?(word) || word.match?(/\W/) }.length
@@ -11,7 +13,7 @@ module Textation
       result
     end
 
-    def self.analyze(text)
+    def analyze(text)
       result = {}
       result[:character_count] = text.length
       result[:character_count_excluding_spaces] = text.gsub(/\s/, '').length
@@ -23,5 +25,15 @@ module Textation
       result[:average_sentences_per_paragraph] = (result[:sentence_count].to_f / result[:paragraph_count]).round(1)
       result
     end
+
+    def top_words(text, num)
+      text.downcase
+          .scan(/\w+[\w']*/)
+          .group_by(&:itself)
+          .transform_values(&:count)
+          .sort_by { |k, v| -v }
+          .first(num)
+          .map(&:first).join(', ')
+    end
   end
-end
+#end

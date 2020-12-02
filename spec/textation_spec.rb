@@ -1,12 +1,17 @@
 require 'textation/text'
 
-describe Textation::Text do
+describe Text do
+  tx = Text.new
   it 'text analyze' do
-    expect(Textation::Text.analyze('I love Ruby!')).to be_a Hash
+    expect(tx.analyze('I love Ruby!')).to be_a Hash
   end
 
   it 'analyze file' do
-    expect(Textation::Text.analyze_file('data/test_source_text.txt')).to be_a Hash
+    expect(tx.analyze_file('data/test_source_text.txt')).to be_a Hash
+  end
+
+  it 'top words' do
+    expect(tx.top_words('I love Ruby! And Ruby loves me!', 1)).to eq('ruby')
   end
 end
 
