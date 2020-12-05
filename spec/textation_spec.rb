@@ -19,7 +19,8 @@ describe Text do
       percentage_of_useful_words: 40.0,
       unique_words:  ["i", "love", "ruby", "and", "loves", "me"],
       percentage_of_unique_words: 80.0,
-      occurences_of_words: {"ruby"=>2, "i"=>1, "love"=>1, "and"=>1, "loves"=>1, "me"=>1}
+      occurences_of_words: {"ruby"=>2, "i"=>1, "love"=>1, "and"=>1, "loves"=>1, "me"=>1},
+      percentage_of_words: {"ruby"=>30.0, "i"=>10.0, "love"=>10.0, "and"=>10.0, "loves"=>10.0, "me"=>10.0}
   }
 
   it 'text file analyze' do

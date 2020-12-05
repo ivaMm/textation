@@ -28,6 +28,7 @@ require "textation/version"
       result[:unique_words] = text.downcase.split(/[^[[:alpha:]]]/).select { |w| w.length >= 1 }.uniq
       result[:percentage_of_unique_words] = (result[:unique_words].length.to_f / result[:word_count]).round(1) * 100
       result[:occurences_of_words] = occurences_of_words(text)
+      result[:percentage_of_words] = percentage_of_words(text)
       result
     end
 
@@ -70,6 +71,16 @@ require "textation/version"
 
       def occurence_of_word(text, word)
         occurences_of_words(text)[word.downcase]
+      end
+
+      def percentage_of_words(text)
+        occurences = occurences_of_words(text)
+        len = text.split(/[^[[:alpha:]]]/).length
+        occurences.transform_values { |v| (v.to_f / len).round(1) * 100 }
+      end
+
+      def percentage_of_word(text, word)
+        percentage_of_words(text)[word.downcase]
       end
 
       def syllables_per_lines(text)
