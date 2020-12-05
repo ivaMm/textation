@@ -4,8 +4,8 @@ require "textation/version"
   class Text
     #extend Textation
 
-    def analyze_file(file_name)
-      text = File.open(file_name, 'r').read
+    def analyze_file(text_file)
+      text = File.open(text_file, 'r').read
       analyze(text)
     end
 
@@ -20,7 +20,7 @@ require "textation/version"
       result[:paragraph] = text.split(/\n\n/)
       result[:paragraph_count] = result[:paragraph].length
       result[:lines_per_paragraph] = result[:paragraph].map { |p| p.split(/\n/).length }
-      result[:syllables_per_lines] = syllables_per_lines(text)
+      result[:syllables_per_line] = syllables_per_line(text)
       result[:average_words_per_sentence] = (result[:word_count].to_f / result[:sentence_count]).round(1)
       result[:average_sentences_per_paragraph] = (result[:sentence_count].to_f / result[:paragraph_count]).round(1)
       result[:useful_words] = useful_words(text)
@@ -83,7 +83,7 @@ require "textation/version"
       percentage_of_words(text)[word.downcase]
     end
 
-    def syllables_per_lines(text)
+    def syllables_per_line(text)
       text.downcase.split(/\n/).map do |line|
         line.split(/\W+/).map do |word|
           if word.split(/[^aeiouy]+/).delete_if(&:empty?).length > 1
