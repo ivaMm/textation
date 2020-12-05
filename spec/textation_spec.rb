@@ -12,7 +12,7 @@ describe Text do
       paragraph: ['I love Ruby! And Ruby loves me!'],
       paragraph_count: 1,
       lines_per_paragraph: [1],
-      syllables_per_lines: [9],
+      syllables_per_line: [9],
       average_words_per_sentence: 4.0,
       average_sentences_per_paragraph: 2.0,
       useful_words:  ["love", "ruby", "loves"],
