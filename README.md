@@ -42,9 +42,9 @@ analyzer.analyze('I love Ruby! And Ruby loves me!')
 #     average_words_per_sentence: 4.0,
 #     average_sentences_per_paragraph: 2.0,
 #     useful_words:  ["love", "ruby", "loves"],
-#     percentage_of_useful_words: 40.0,
+#     percentage_of_useful_words: 37.5,
 #     unique_words:  ["i", "love", "ruby", "and", "loves", "me"],
-#     percentage_of_unique_words: 80.0,
+#     percentage_of_unique_words: 75.0,
 #     occurences_of_words: {"ruby"=>2, "i"=>1, "love"=>1, "and"=>1, "loves"=>1, "me"=>1},
 #     percentage_of_words: {"ruby"=>30.0, "i"=>10.0, "love"=>10.0, "and"=>10.0, "loves"=>10.0, "me"=>10.0}
 #   }

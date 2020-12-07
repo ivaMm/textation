@@ -16,7 +16,7 @@ require "textation/version"
       result[:letter_count] = text.gsub(/[^[[:alpha:]]]/, "").length
       result[:line_count] = text.split(/\n/).length
       result[:word_count] = text.split(/[^[[:alpha:]]]/).length
-      result[:sentence_count] = text.split(/\.{1,3}\s?\r?\n?|\?!|\?|!/).length
+      result[:sentence_count] = text.split(/[^[[:alpha:]]{1}\.]\.{1,3}\s?\r?\n?|\?!\!\?|\?|!/).length
       result[:paragraph] = text.split(/\n\n/)
       result[:paragraph_count] = result[:paragraph].length
       result[:lines_per_paragraph] = result[:paragraph].map { |p| p.split(/\n/).length }
@@ -24,9 +24,9 @@ require "textation/version"
       result[:average_words_per_sentence] = (result[:word_count].to_f / result[:sentence_count]).round(1)
       result[:average_sentences_per_paragraph] = (result[:sentence_count].to_f / result[:paragraph_count]).round(1)
       result[:useful_words] = useful_words(text)
-      result[:percentage_of_useful_words] = (useful_words(text).length.to_f / result[:word_count]).round(1) * 100
+      result[:percentage_of_useful_words] = ((result[:useful_words].length.to_f / result[:word_count]) * 100).round(2)
       result[:unique_words] = text.downcase.split(/[^[[:alpha:]]]/).select { |w| w.length >= 1 }.uniq
-      result[:percentage_of_unique_words] = (result[:unique_words].length.to_f / result[:word_count]).round(1) * 100
+      result[:percentage_of_unique_words] = ((result[:unique_words].length.to_f / result[:word_count]) * 100).round(2)
       result[:occurences_of_words] = occurences_of_words(text)
       result[:percentage_of_words] = percentage_of_words(text)
       result

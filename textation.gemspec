@@ -3,10 +3,10 @@ require_relative 'lib/textation/version'
 Gem::Specification.new do |spec|
   spec.name          = "textation"
   spec.version       = Textation::VERSION
-  spec.authors       = ["iva mudronja"]
+  spec.authors       = ["iva"]
   spec.email         = ["iva.pilizota@gmail.com"]
 
-  spec.summary       = "For text analyze" #%q{TODO: Write a short summary, because RubyGems requires one.}
+  spec.summary       = "Simple text analysis with Ruby" #%q{TODO: Write a short summary, because RubyGems requires one.}
  # spec.description   = %q{TODO: Write a longer description or delete this line.}
   spec.homepage      = "http://rubygems.org/gems/textation" #{}"TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
