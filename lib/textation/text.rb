@@ -13,16 +13,16 @@ require "textation/version"
       result = {}
       result[:character_count] = text.length
       result[:character_count_excluding_spaces] = text.gsub(/\s/, "").length
-      result[:letter_count] = text.gsub(/[^[[:alpha:]]]/, "").length
+      result[:letter_count] = text.gsub(/[^[:alpha:]]/, "").length
       result[:line_count] = text.split(/\n/).length
-      result[:word_count] = text.split(/[^[[:alpha:]]]/).length
-      result[:sentence_count] = text.split(/[^[[:alpha:]]{1}\.]\.{1,3}\s?\r?\n?|\?!\!\?|\?|!/).length
+      result[:word_count] = text.split(/\W+/).delete_if(&:empty?).length
+      result[:sentence_count] = text.split(/[^[:alpha:]{1}\.]\.{1,3}\s?\r?\n?|\?+|!+|\?!+|!\?+/).length
       result[:paragraph] = text.split(/\n\n/)
       result[:paragraph_count] = result[:paragraph].length
       result[:lines_per_paragraph] = result[:paragraph].map { |p| p.split(/\n/).length }
       result[:syllables_per_line] = syllables_per_line(text)
-      result[:average_words_per_sentence] = (result[:word_count].to_f / result[:sentence_count]).round(1)
-      result[:average_sentences_per_paragraph] = (result[:sentence_count].to_f / result[:paragraph_count]).round(1)
+      result[:average_words_per_sentence] = (result[:word_count].to_f / result[:sentence_count]).round(2)
+      result[:average_sentences_per_paragraph] = (result[:sentence_count].to_f / result[:paragraph_count]).round(2)
       result[:useful_words] = useful_words(text)
       result[:percentage_of_useful_words] = ((result[:useful_words].length.to_f / result[:word_count]) * 100).round(2)
       result[:unique_words] = text.downcase.split(/[^[[:alpha:]]]/).select { |w| w.length >= 1 }.uniq
@@ -33,9 +33,9 @@ require "textation/version"
     end
 
     def useful_words(text)
-      stop_words = File.open('data/stop_words.txt', 'r').read.split(/\b/)
+      stop_words = File.open('data/stop_words.txt', 'r').read.split(/\n/)
       text.downcase
-          .split(/[^[[:alpha:]]]/)
+          .split(/\W+/)
           .delete_if { |w| stop_words.include?(w) }
           .select { |w| w.length >= 1 }
           .uniq
@@ -47,7 +47,7 @@ require "textation/version"
     end
 
     def top_words_all(text, num = 3)
-      text = text.downcase.split(/\b/)
+      text = text.downcase.split(/\W+/)
       top_words(text, num)
     end
 
@@ -61,7 +61,7 @@ require "textation/version"
 
     def occurences_of_words(text)
       text.downcase
-          .split(/[^[[:alpha:]]]/)
+          .split(/\W+/)
           .delete_if(&:empty?)
           .group_by(&:itself)
           .transform_values(&:count)
@@ -75,8 +75,8 @@ require "textation/version"
 
     def percentage_of_words(text)
       occurences = occurences_of_words(text)
-      len = text.split(/[^[[:alpha:]]]/).length
-      occurences.transform_values { |v| (v.to_f / len).round(1) * 100 }
+      len = text.split(/\W+/).length
+      occurences.transform_values { |v| ((v.to_f / len) * 100).round(2) }
     end
 
     def percentage_of_word(text, word)
