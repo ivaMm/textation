@@ -31,6 +31,7 @@ class Text
     result
   end
 
+  # TODO: text_file!
   def useful_words(text)
     text.downcase
         .split(/\W+/)
@@ -85,7 +86,7 @@ class Text
     text.downcase.split(/\n/).map do |line|
       line.split(/\W+/).map do |word|
         if word.split(/[^aeiouy]+/).delete_if(&:empty?).length > 1
-          word.gsub(/e$|e{1}[a-z&&[^aeiou]*]$/, "").split(/[^aeiouy]+/).delete_if(&:empty?).length
+          word.gsub(/e$|es$|ed$/, "").split(/[^aeiouy]+/).delete_if(&:empty?).length
         else
           word.split(/[^aeiouy]+/).delete_if(&:empty?).length
         end

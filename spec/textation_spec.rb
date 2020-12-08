@@ -16,7 +16,7 @@ describe Text do
     percentage_of_useful_words: 5.56,
     percentage_of_words: "someone: 5.56, must: 5.56, have: 5.56, slandered: 5.56, josef: 5.56, k: 5.56, for: 5.56, one: 5.56, morning: 5.56, without: 5.56, having: 5.56, done: 5.56, anything: 5.56, truly: 5.56, wrong: 5.56, he: 5.56, was: 5.56, arrested: 5.56",
     sentence_count: 5,
-    syllables_per_line: "26, 26, 26, 0, 26, 26",
+    syllables_per_line: "27, 27, 27, 0, 27, 27",
     unique_words: "someone, must, have, slandered, josef, k, for, one, morning, without, having, done, anything, truly, wrong, he, was, arrested",
     useful_words: "slandered, josef, morning, wrong, arrested",
     word_count: 90,
@@ -39,7 +39,7 @@ describe Text do
       unique_words:  "i, love, ruby, and, loves, me",
       percentage_of_unique_words: 85.71,
       occurences_of_words: "ruby: 2, i: 1, love: 1, and: 1, loves: 1, me: 1",
-      percentage_of_words: "ruby: 28.57, i: 14.29, love: 14.29, and: 14.29, loves: 14.29, me: 14.29",
+      percentage_of_words: "ruby: 28.57, i: 14.29, love: 14.29, and: 14.29, loves: 14.29, me: 14.29"
   }
 
   it 'text file analyze' do
@@ -55,6 +55,10 @@ describe Text do
 
   it 'top words' do
     expect(tx.occurence_of_word('I love Ruby! And Ruby loves me!', 'ruby')).to eq(2)
+  end
+
+  it 'top words file text' do
+    expect(tx.occurence_of_word('data/test_source_text.txt', 'morning')).to eq(5)
   end
 end
 
