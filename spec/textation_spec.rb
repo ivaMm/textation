@@ -1,4 +1,4 @@
-require 'textation/text'
+require 'textation'
 
 describe Text do
   tx = Text.new
