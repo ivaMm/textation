@@ -4,12 +4,10 @@ STOP_WORDS = ["a", "a's", "able", "about", "above", "according", "accordingly", 
 
 
 class Text
-  def analyze_file(text_file)
-    text = File.open(text_file, 'r').read
-    analyze(text)
-  end
+  # percentages?
 
   def analyze(text)
+    text = check_input(text)
     result = {}
     result[:character_count] = text.length
     result[:character_count_excluding_spaces] = text.gsub(/\s/, "").length
@@ -31,8 +29,8 @@ class Text
     result
   end
 
-  # TODO: text_file!
   def useful_words(text)
+    text = check_input(text)
     text.downcase
         .split(/\W+/)
         .delete_if { |w| STOP_WORDS.include?(w) }
@@ -46,7 +44,7 @@ class Text
   end
 
   def top_words_all(text, num = 3)
-    text = text.downcase.split(/\W+/)
+    text = (check_input(text)).downcase.split(/\W+/)
     top_words(text, num)
   end
 
@@ -59,6 +57,7 @@ class Text
   end
 
   def occurences_of_words(text)
+    text = check_input(text)
     text.downcase
         .split(/\W+/)
         .delete_if(&:empty?)
@@ -92,5 +91,9 @@ class Text
         end
       end
     end.map(&:sum)
+  end
+
+  def check_input(text)
+    text.match?(/.txt$/) ? File.open(text, 'r').read : text
   end
 end

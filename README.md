@@ -23,11 +23,11 @@ Or install it yourself as:
 # Create an instance for usage
 analyzer = Text.new
 
-# Analyze text file
-analyzer.analyze_file(text_file)
-#=> will call method analyze(text)👇
+# all methods work for .txt file and for strings
 
-# Analyze string
+# analyze .txt file || string
+analyzer.analyze('some_text.txt')
+#=> will work same as for string👇
 analyzer.analyze('I love Ruby! And Ruby loves me!')
 #=> { character_count: 31,
 #     character_count_excluding_spaces: 25,
@@ -48,25 +48,32 @@ analyzer.analyze('I love Ruby! And Ruby loves me!')
 #     percentage_of_words: "ruby: 28.57, i: 14.29, love: 14.29, and: 14.29, loves: 14.29, me: 14.29"
 #   }
 
-# get first 3 top words including stop words
-analyzer.top_words_all('I love Ruby')
+
+# get first 3 top words including stop words (pass .txt file || string)
+analyzer.top_words_all('data/test_source_text.txt')
+#=> 'someone, must, have'
+
 # you can pass number
-analyzer.top_words_all('I love Ruby! And Ruby loves me!, 1)
-#=> 'ruby'
+analyzer.top_words_all('data/test_source_text.txt', 1)
+#=> 'someone'
 
-# get first 3 top words excluding stop words
-analyzer.top_words_no_stop_words('I love Ruby')
+
+# get first 3 top words excluding stop words (pass .txt file || string)
+analyzer.top_words_no_stop_words('data/test_source_text.txt')
+#=> 'slandered, josef, morning'
+
 # you can pass number
-analyzer.top_words_no_stop_words('I love Ruby! And Ruby loves me!, 1)
-#=> 'ruby'
+analyzer.top_words_no_stop_words('data/test_source_text.txt', 4)
+#=> 'slandered, josef, morning,wrong'
 
-# get occurence of word
-analyzer.occurence_of_word('I love Ruby! And Ruby loves me!, 'ruby')
-#=> 2
 
-# get percentage of word
-analyzer.percentage_of_word('I love Ruby! And Ruby loves me!, 'ruby')
-#=> 28.57
+# get occurence of word (pass .txt file || string)
+analyzer.occurence_of_word(data/test_source_text.txt', 'morning')
+#=> 5
+
+# get percentage of word (pass .txt file || string)
+analyzer.percentage_of_word('data/test_source_text.txt', 'wrong')
+#=>
 
 ## License
 

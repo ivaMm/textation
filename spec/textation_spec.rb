@@ -42,23 +42,28 @@ describe Text do
       percentage_of_words: "ruby: 28.57, i: 14.29, love: 14.29, and: 14.29, loves: 14.29, me: 14.29"
   }
 
-  it 'text file analyze' do
-    expect(tx.analyze_file('data/test_source_text.txt')).to be_a Hash
-    expect(tx.analyze_file('data/test_source_text.txt')).to eq(result_file)
-
-  end
-
   it 'text analyze' do
+    expect(tx.analyze('data/test_source_text.txt')).to be_a Hash
+    expect(tx.analyze('data/test_source_text.txt')).to eq(result_file)
     expect(tx.analyze('I love Ruby!')).to be_a Hash
     expect(tx.analyze('I love Ruby! And Ruby loves me!')).to eq(result)
   end
 
-  it 'top words' do
+  it 'top words no stop words' do
+    expect(tx.top_words_no_stop_words('data/test_source_text.txt')).to eq('slandered, josef, morning')
+  end
+
+  it 'top words all' do
+    expect(tx.top_words_all('data/test_source_text.txt')).to eq('someone, must, have')
+  end
+
+  it 'occurence of word' do
+    expect(tx.occurence_of_word('data/test_source_text.txt', 'morning')).to eq(5)
     expect(tx.occurence_of_word('I love Ruby! And Ruby loves me!', 'ruby')).to eq(2)
   end
 
-  it 'top words file text' do
-    expect(tx.occurence_of_word('data/test_source_text.txt', 'morning')).to eq(5)
+  it 'occurence of word' do
+    expect(tx.occurence_of_word('I love Ruby! And Ruby loves me!', 'ruby')).to eq(2)
   end
 end
 
