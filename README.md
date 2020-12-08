@@ -64,7 +64,7 @@ analyzer.top_words_no_stop_words('data/test_source_text.txt')
 
 # you can pass number
 analyzer.top_words_no_stop_words('data/test_source_text.txt', 4)
-#=> 'slandered, josef, morning,wrong'
+#=> 'slandered, josef, morning, wrong'
 
 
 # get occurence of word (pass .txt file || string)
@@ -73,7 +73,7 @@ analyzer.occurence_of_word(data/test_source_text.txt', 'morning')
 
 # get percentage of word (pass .txt file || string)
 analyzer.percentage_of_word('data/test_source_text.txt', 'wrong')
-#=>
+#=> 5.56
 
 ## License
 

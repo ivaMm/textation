@@ -4,14 +4,12 @@ STOP_WORDS = ["a", "a's", "able", "about", "above", "according", "accordingly", 
 
 
 class Text
-  # percentages?
-
   def analyze(text)
     text = check_input(text)
     result = {}
     result[:character_count] = text.length
-    result[:character_count_excluding_spaces] = text.gsub(/\s/, "").length
-    result[:letter_count] = text.gsub(/[^[:alpha:]]/, "").length
+    result[:character_count_excluding_spaces] = text.gsub(/\s/, '').length
+    result[:letter_count] = text.gsub(/[^[:alpha:]]/, '').length
     result[:line_count] = text.split(/\n/).length
     result[:word_count] = text.split(/\W+/).delete_if(&:empty?).length
     result[:sentence_count] = text.split(/[^[:alpha:]{1}\.]\.{1,3}\s?\r?\n?|\?+|!+|\?!+|!\?+/).length
@@ -73,7 +71,7 @@ class Text
 
   def percentage_of_words(text)
     occurences = occurences_of_words(text)
-    len = text.split(/\W+/).length
+    len = check_input(text).split(/\W+/).length
     occurences.transform_values { |v| ((v.to_f / len) * 100).round(2) }
   end
 

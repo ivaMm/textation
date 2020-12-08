@@ -62,8 +62,8 @@ describe Text do
     expect(tx.occurence_of_word('I love Ruby! And Ruby loves me!', 'ruby')).to eq(2)
   end
 
-  it 'occurence of word' do
-    expect(tx.occurence_of_word('I love Ruby! And Ruby loves me!', 'ruby')).to eq(2)
+  it 'percentage of word' do
+    expect(tx.percentage_of_word('data/test_source_text.txt', 'morning')).to eq(5.56)
   end
 end
 
